@@ -7,10 +7,7 @@ package com.mycompany.desafiogg.src.model;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- *
- * @author giuliog
- */
+
 public class Banco {
     List<Conta> contas;
     private String nome;

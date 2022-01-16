@@ -7,10 +7,7 @@ package com.mycompany.desafiogg.src.controller;
 import com.mycompany.desafiogg.src.model.Banco;
 import com.mycompany.desafiogg.src.model.Conta;
 
-/**
- *
- * @author giuliog
- */
+
 public class ContaController {
     private Banco banco;
     

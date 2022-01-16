@@ -43,6 +43,27 @@ public class Banco {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
+
+    public Conta getConta(String codigoConta) {
+        int codigoContaInt = Integer.parseInt(codigoConta);
+        for (Conta conta : contas) {
+            if (conta.getCodigo() == codigoContaInt) {
+                return conta;
+            }
+        }
+        
+        return null;
+    }
+    
+     public Conta getConta(int codigoConta) {
+        for (Conta conta : contas) {
+            if (conta.getCodigo() == codigoConta) {
+                return conta;
+            }
+        }
+        
+        return null;
+    }
     
     
 }

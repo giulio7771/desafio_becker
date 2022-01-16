@@ -23,6 +23,7 @@ public class ContaController {
         conta.setCodigo(this.banco.getNumeroContasRegistradas() + 1);
         conta.setSaldo(0);
         conta.setTitular(titular);
+        conta.setCpfTitular(cpfTitular);
         
         this.banco.addConta(conta);
     }

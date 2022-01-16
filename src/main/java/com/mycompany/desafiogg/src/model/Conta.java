@@ -4,7 +4,6 @@
  */
 package com.mycompany.desafiogg.src.model;
 
-import java.util.Currency;
 import java.util.LinkedList;
 import java.util.List;
 

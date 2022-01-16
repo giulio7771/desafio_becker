@@ -7,6 +7,7 @@ package com.mycompany.desafiogg.src.view;
 import com.mycompany.desafiogg.src.controller.ContaController;
 import com.mycompany.desafiogg.src.model.Banco;
 import com.mycompany.desafiogg.src.model.Conta;
+import java.awt.event.ItemEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +24,23 @@ public class View extends javax.swing.JFrame {
      */
     public View() {
         initComponents();
+        
+         jComboBoxContasEditarConta.addItemListener(event -> {
+            // The item affected by the event.
+            String item = (String) event.getItem();
+            this.setContaInEditView(item);
+        });
+    }
+    
+    public void setContaInEditView(String codigoConta) {
+        Conta conta = this.banco.getConta(codigoConta);
+        
+        if (conta == null) {
+            JOptionPane.showMessageDialog(null, "Não foi possível encontrar a conta!");
+        }
+        jTextFieldContasEditarCpf.setText(conta.getCpfTitular());
+        jTextFieldContasEditarTitular.setText(conta.getTitular());
+        jTextFieldContasEditarSaldo.setText(conta.getSaldo()+"");
     }
     
     public void setBanco(Banco banco) {
@@ -64,6 +82,8 @@ public class View extends javax.swing.JFrame {
         jButtonAtualizarConta = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jComboBoxContasEditarConta = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldContasEditarSaldo = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
 
@@ -139,8 +159,28 @@ public class View extends javax.swing.JFrame {
         jLabel4.setText("CPF");
 
         jButtonAtualizarConta.setText("Atualizar Conta");
+        jButtonAtualizarConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarContaActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Conta");
+
+        jComboBoxContasEditarConta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jComboBoxContasEditarContaMousePressed(evt);
+            }
+        });
+        jComboBoxContasEditarConta.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jComboBoxContasEditarContaComponentShown(evt);
+            }
+        });
+
+        jLabel6.setText("Saldo");
+
+        jTextFieldContasEditarSaldo.setEnabled(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -154,16 +194,18 @@ public class View extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createSequentialGroup()
                             .addComponent(jLabel5)
                             .addGap(18, 18, 18)
-                            .addComponent(jComboBoxContasEditarConta, 0, 124, Short.MAX_VALUE))
+                            .addComponent(jComboBoxContasEditarConta, 0, 128, Short.MAX_VALUE))
                         .addGroup(jPanel5Layout.createSequentialGroup()
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel4)
-                                .addComponent(jLabel3))
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel6))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jTextFieldContasEditarTitular)
-                                .addComponent(jTextFieldContasEditarCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)))))
-                .addContainerGap(364, Short.MAX_VALUE))
+                                .addComponent(jTextFieldContasEditarCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                                .addComponent(jTextFieldContasEditarSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(360, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,8 +223,12 @@ public class View extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jTextFieldContasEditarCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextFieldContasEditarSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addComponent(jButtonAtualizarConta)
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Editar", jPanel5);
@@ -195,7 +241,7 @@ public class View extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+            .addComponent(jTabbedPane2)
         );
 
         jTabbedPane2.getAccessibleContext().setAccessibleName("Cadastrar/Editar");
@@ -260,6 +306,23 @@ public class View extends javax.swing.JFrame {
         this.limparCadastroConta();
     }//GEN-LAST:event_jButtonLimparCadastroContaActionPerformed
 
+    private void jComboBoxContasEditarContaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jComboBoxContasEditarContaComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxContasEditarContaComponentShown
+
+    private void jComboBoxContasEditarContaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxContasEditarContaMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxContasEditarContaMousePressed
+
+    private void jButtonAtualizarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarContaActionPerformed
+        int codigoConta = jComboBoxContasEditarConta.getSelectedIndex()+1;
+        Conta conta = this.banco.getConta(codigoConta);
+        conta.setCpfTitular(jTextFieldContasEditarCpf.getText());
+        conta.setTitular(jTextFieldContasEditarTitular.getText());
+        
+        JOptionPane.showMessageDialog(null, "Atualizada conta " + codigoConta + " com sucesso!");
+    }//GEN-LAST:event_jButtonAtualizarContaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -306,6 +369,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -316,6 +380,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldContasCadastrarCpf;
     private javax.swing.JTextField jTextFieldContasCadastrarTitular;
     private javax.swing.JTextField jTextFieldContasEditarCpf;
+    private javax.swing.JTextField jTextFieldContasEditarSaldo;
     private javax.swing.JTextField jTextFieldContasEditarTitular;
     // End of variables declaration//GEN-END:variables
 }

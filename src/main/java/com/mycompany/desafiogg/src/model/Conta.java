@@ -5,6 +5,7 @@
 package com.mycompany.desafiogg.src.model;
 
 import java.util.Currency;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -13,16 +14,21 @@ import java.util.List;
  */
 public class Conta {
     
-    private Currency saldo;
+    private float saldo;
     private String titular;
-    private String codigo;
+    private int codigo;
+    private String cpfTitular;
     private List<MovimentacaoFinanceira> movimentacoes;
+    
+    public Conta() {
+        this.movimentacoes = new LinkedList<MovimentacaoFinanceira>();
+    }
 
-    public Currency getSaldo() {
+    public float getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(Currency saldo) {
+    public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
 
@@ -34,11 +40,11 @@ public class Conta {
         this.titular = titular;
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
@@ -48,6 +54,14 @@ public class Conta {
 
     public void setMovimentacoes(List<MovimentacaoFinanceira> movimentacoes) {
         this.movimentacoes = movimentacoes;
+    }
+    
+    public void setCpfTitular(String cpf) {
+        this.cpfTitular = cpf;
+    }
+    
+    public String getCpfTitular() {
+        return this.cpfTitular;
     }
     
 }
